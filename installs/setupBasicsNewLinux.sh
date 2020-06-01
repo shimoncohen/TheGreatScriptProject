@@ -6,8 +6,8 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 ############################### install basics ###############################
-bash ./installUsefullPackages.sh
-bash ./snap/installSnap.sh
+bash ./usefullPackages.sh
+bash ./snap/snap.sh
 
 DEV=0
 DOCKER=0
@@ -52,31 +52,31 @@ done
 
 # Install development tools
 if [ "$DEV" -eq 1 ]; then
-    bash ./python/installPython3.6.sh
+    bash ./python/python3.6.sh
     bash ./git.sh
-	bash ./installVisualStudioCode.sh
+	bash ./visualStudioCode.sh
 fi
 
 # Install docker
 if [ "$DOCKER" -eq 1 ]; then
-	bash ./docker/installDocker.sh
+	bash ./docker/docker.sh
 fi
 
 # Install kubernetes and microk8s
 if [ "$KUBERNETES" -eq 1 ]; then
-	bash ./docker/installDocker.sh
-    bash ./docker/installKubernetes.sh
-    bash ./docker/installMicrok8s.sh
+	bash ./docker/docker.sh
+    bash ./docker/kubernetes.sh
+    bash ./docker/microk8s.sh
 fi
 
 # Install azure-cli
 if [ "$AZURE" -eq 1 ]; then
-	bash ./docker/installAzureCli.sh
+	bash ./docker/azureCli.sh
 fi
 
 # Install web development tools
 if [ "$WEB_DEV" -eq 1 ]; then
-	bash ./installNode.sh
+	bash ./node.sh
 fi
 
 ####################### specific for *my* old computer #######################
