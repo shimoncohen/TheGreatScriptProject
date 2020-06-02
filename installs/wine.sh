@@ -14,7 +14,7 @@ fi
 wget -qO- https://dl.winehq.org/wine-builds/Release.key | sudo apt-key add -
 
 # Add the relevant repository from the WineHQ
-apt-add-repository 'deb http://dl.winehq.org/wine-builds/ubuntu/ xenial main'
+bash ../validation/addRepositoryIfNotPresent.sh 'deb http://dl.winehq.org/wine-builds/ubuntu/ xenial main'
 
 # Update repositories
 apt-get -y update

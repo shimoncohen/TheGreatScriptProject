@@ -32,7 +32,7 @@ do
 done
 
 # Add python repository
-add-apt-repository -y ppa:deadsnakes/ppa
+bash ../../validation/addRepositoryIfNotPresent.sh -y ppa:deadsnakes/ppa
 
 # Update packages
 apt-get -y update

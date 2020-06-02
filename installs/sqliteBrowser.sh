@@ -3,7 +3,7 @@ bash ../validation/checkRootPrivileges.sh
 test $? -eq 0 || exit
 
 # Add repository
-add-apt-repository -y ppa:linuxgndu/sqlitebrowser
+bash ../validation/addRepositoryIfNotPresent.sh -y ppa:linuxgndu/sqlitebrowser
 
 # Update repositories
 apt-get update

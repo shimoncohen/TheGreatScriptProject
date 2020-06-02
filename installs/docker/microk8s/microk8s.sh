@@ -3,7 +3,7 @@ bash ../../../validation/checkRootPrivileges.sh
 test $? -eq 0 || exit
 
 # Install snap
-bash ../snap/installSnap.sh
+bash ../../snap/installSnap.sh
 
 # Install the microk8s snap
 snap install microk8s --classic --channel=1.18/stable

@@ -29,18 +29,15 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
 # Add the docker repository
 DOCKER_REPO=$(lsb_release -cs)
-add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $DOCKER_REPO stable"
+bash ../../validation/addRepositoryIfNotPresent.sh "deb [arch=amd64] https://download.docker.com/linux/ubuntu $DOCKER_REPO stable"
 
 installDockerPackages
 
 # If the install didn't work
 if [ $? -ne 0 ]; then
-
-    # Remove bad repository
-    add-apt-repository -r "deb [arch=amd64] https://download.docker.com/linux/ubuntu $DOCKER_REPO stable"
     
     # Add a different docker repository
-    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
+    bash ../../validation/addRepositoryIfNotPresent.sh "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
     
     installDockerPackages
 fi

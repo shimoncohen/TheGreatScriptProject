@@ -23,18 +23,15 @@ curl -sL https://packages.microsoft.com/keys/microsoft.asc |
 
 # Add the Azure CLI software repository
 AZ_REPO=$(lsb_release -cs)
-add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main"
+bash ../../validation/addRepositoryIfNotPresent.sh "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main"
 
 installCli
 
 # If the install didn't work
 if [ $? -ne 0 ]; then
-
-    # Remove bad repository
-    add-apt-repository -r "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main"
     
     # Add a different Azure CLI repository
-    add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ xenial main"
+    bash ../../validation/addRepositoryIfNotPresent.sh "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ xenial main"
     
     installCli
 fi
