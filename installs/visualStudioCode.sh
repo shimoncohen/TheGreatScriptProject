@@ -1,5 +1,5 @@
 # Check if script is running as root
-bash ../checkRootPrivilages.sh
+bash ../validation/checkRootPrivileges.sh
 test $? -eq 0 || exit
 
 ##### From: https://code.visualstudio.com/docs/setup/linux

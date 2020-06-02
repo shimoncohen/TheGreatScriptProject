@@ -2,13 +2,11 @@
 bash ../../validation/checkRootPrivileges.sh
 test $? -eq 0 || exit
 
-VERSION=""
-PACKAGES="pipPackages.txt"
+VERSION=2.7
 
 function usage {
-    echo "Run pipInstalls.sh to install packages listed in pipPackages.txt"
-    echo "Run python.sh --version <wanted_version> to install packages on a specific version of pip"
-    echo "Run python.sh --version <path> to install packages from a different file"
+    echo "Run python.sh to install default version 2.7"
+    echo "Run python.sh --version <wanted_version> to install a different version"
 }
 
 # Loop through arguments and process them
@@ -30,12 +28,22 @@ do
         shift # Remove
         shift
         ;;
-        --packages)
-        PACKAGES="$2"
-        shift # Remove
-        shift
-        ;;
     esac
 done
 
-pip$VERSION install -r $PACKAGES
+# Add python repository
+add-apt-repository -y ppa:deadsnakes/ppa
+
+# Update packages
+apt-get -y update
+
+# Grab major release
+MAJOR=$(echo $VERSION | grep -oP '^[0-9]*')
+
+# Install dependencies
+apt-get -y install --no-install-recommends \
+    python$VERSION\
+    python$MAJOR-pip
+
+# Upgrade pip
+python$VERSION -m pip install --upgrade --force pip

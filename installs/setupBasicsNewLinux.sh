@@ -1,5 +1,5 @@
 # Check if script is running as root
-bash ../checkRootPrivilages.sh
+bash ../validation/checkRootPrivileges.sh
 test $? -eq 0 || exit
 
 ############################### install basics ###############################
@@ -63,7 +63,7 @@ fi
 if [ "$KUBERNETES" -eq 1 ]; then
 	bash ./docker/docker.sh
     bash ./docker/kubernetes.sh
-    bash ./docker/microk8s.sh
+    bash ./docker/microk8s/microk8s.sh
 fi
 
 # Install azure-cli
