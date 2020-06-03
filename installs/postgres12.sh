@@ -3,6 +3,14 @@ bash ../validation/checkRootPrivileges.sh
 test $? -eq 0 || exit
 
 function installPackages {
+
+    # Upgrade pip to latest version
+    python3.5 -m pip install --upgrade pip
+
+    # Install needed python packages
+    python3.5 -m pip install setuptools wheel
+    python3.5 -m pip install psycopg2
+
     # Update repositories
     apt-get -y update
 
@@ -33,4 +41,4 @@ fi
 #service postgresql start
 
 # Stop postgres service:
-#service postgresql start
+#service postgresql stop

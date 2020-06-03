@@ -37,8 +37,12 @@ bash ../../validation/addRepositoryIfNotPresent.sh -y ppa:deadsnakes/ppa
 # Update packages
 apt-get -y update
 
-# Grab major release
 MAJOR=$(echo $VERSION | grep -oP '^[0-9]*')
+
+# If version is 2.* then major is blank to represent default python
+if [ $MAJOR -eq 2 ]; then
+    MAJOR=''
+fi
 
 # Install dependencies
 apt-get -y install --no-install-recommends \
