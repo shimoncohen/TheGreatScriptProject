@@ -1,7 +1,9 @@
 ######## Play on linux lets you install windows applications on linux ########
 
+DIRECTORY=$(readlink -f $0)
+
 # Check if script is running as root
-bash ../validation/checkRootPrivileges.sh
+bash ${DIRECTORY%/*}/../validation/checkRootPrivileges.sh
 test $? -eq 0 || exit
 
 # Install wine

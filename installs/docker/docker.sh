@@ -1,5 +1,7 @@
+DIRECTORY=$(readlink -f $0)
+
 # Check if script is running as root
-bash ../../validation/checkRootPrivileges.sh
+bash ${DIRECTORY%/*}/../../validation/checkRootPrivileges.sh
 test $? -eq 0 || exit
 
 function installDockerPackages {
@@ -29,7 +31,7 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
 # Add the docker repository
 DOCKER_REPO=$(lsb_release -cs)
-bash ../../validation/addRepositoryIfNotPresent.sh "deb [arch=amd64] https://download.docker.com/linux/ubuntu $DOCKER_REPO stable"
+bash ${DIRECTORY%/*}/../../validation/addRepositoryIfNotPresent.sh "deb [arch=amd64] https://download.docker.com/linux/ubuntu $DOCKER_REPO stable"
 
 installDockerPackages
 
@@ -37,7 +39,7 @@ installDockerPackages
 if [ $? -ne 0 ]; then
     
     # Add a different docker repository
-    bash ../../validation/addRepositoryIfNotPresent.sh "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
+    bash ${DIRECTORY%/*}/../../validation/addRepositoryIfNotPresent.sh "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
     
     installDockerPackages
 fi

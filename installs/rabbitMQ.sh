@@ -1,5 +1,7 @@
+DIRECTORY=$(readlink -f $0)
+
 # Check if script is running as root
-bash ../validation/scheckRootPrivileges.sh
+bash ${DIRECTORY%/*}/../validation/scheckRootPrivileges.sh
 test $? -eq 0 || exit
 
 

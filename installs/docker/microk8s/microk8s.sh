@@ -1,9 +1,11 @@
+DIRECTORY=$(readlink -f $0)
+
 # Check if script is running as root
-bash ../../../validation/checkRootPrivileges.sh
+bash ${DIRECTORY%/*}/../../../validation/checkRootPrivileges.sh
 test $? -eq 0 || exit
 
 # Install snap
-bash ../../snap/installSnap.sh
+bash ${DIRECTORY%/*}/../../snap/snap.sh
 
 # Install the microk8s snap
 snap install microk8s --classic --channel=1.18/stable

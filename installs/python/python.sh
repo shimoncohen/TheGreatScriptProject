@@ -1,5 +1,7 @@
+DIRECTORY=$(readlink -f $0)
+
 # Check if script is running as root
-bash ../../validation/checkRootPrivileges.sh
+bash ${DIRECTORY%/*}/../../validation/checkRootPrivileges.sh
 test $? -eq 0 || exit
 
 VERSION=2.7
@@ -32,7 +34,7 @@ do
 done
 
 # Add python repository
-bash ../../validation/addRepositoryIfNotPresent.sh -y ppa:deadsnakes/ppa
+bash ${DIRECTORY%/*}/../../validation/addRepositoryIfNotPresent.sh -y ppa:deadsnakes/ppa
 
 # Update packages
 apt-get -y update

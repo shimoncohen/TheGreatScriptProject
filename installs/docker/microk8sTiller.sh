@@ -1,5 +1,7 @@
+DIRECTORY=$(readlink -f $0)
+
 # Check if script is running as root
-bash ../../validation/checkRootPrivileges.sh
+bash ${DIRECTORY%/*}/../../validation/checkRootPrivileges.sh
 test $? -eq 0 || exit
 
 # From: https://www.billmann.de/post/2019/11/12/setup-microk8s/

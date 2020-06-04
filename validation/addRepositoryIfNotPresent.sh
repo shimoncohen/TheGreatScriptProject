@@ -1,5 +1,7 @@
+DIRECTORY=$(readlink -f $0)
+
 # Check if script is running as root
-bash ./checkRootPrivileges.sh
+bash ${DIRECTORY%/*}/checkRootPrivileges.sh
 test $? -eq 0 || exit
 
 function usage {

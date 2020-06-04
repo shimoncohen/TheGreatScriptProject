@@ -1,10 +1,13 @@
+DIRECTORY=$(readlink -f $0)
+DIRECTORY=${DIRECTORY%/*}
+
 # Check if script is running as root
-bash ../validation/checkRootPrivileges.sh
+bash ${DIRECTORY%/*}/../validation/checkRootPrivileges.sh
 test $? -eq 0 || exit
 
 ############################### install basics ###############################
-bash ./usefullPackages.sh
-bash ./snap/snap.sh
+bash $DIRECTORY/usefullPackages.sh
+bash $DIRECTORY/snap/snap.sh
 
 DEV=0
 DOCKER=0
@@ -49,31 +52,31 @@ done
 
 # Install development tools
 if [ "$DEV" -eq 1 ]; then
-    bash ./python/python3.6.sh
-    bash ./git.sh
-	bash ./visualStudioCode.sh
+    bash $DIRECTORY/python/python3.6.sh
+    bash $DIRECTORY/git.sh
+	bash $DIRECTORY/visualStudioCode.sh
 fi
 
 # Install docker
 if [ "$DOCKER" -eq 1 ]; then
-	bash ./docker/docker.sh
+	bash $DIRECTORY/docker/docker.sh
 fi
 
 # Install kubernetes and microk8s
 if [ "$KUBERNETES" -eq 1 ]; then
-	bash ./docker/docker.sh
-    bash ./docker/kubernetes.sh
-    bash ./docker/microk8s/microk8s.sh
+	bash $DIRECTORY/docker/docker.sh
+    bash $DIRECTORY/docker/kubernetes.sh
+    bash $DIRECTORY/docker/microk8s/microk8s.sh
 fi
 
 # Install azure-cli
 if [ "$AZURE" -eq 1 ]; then
-	bash ./docker/azureCli.sh
+	bash $DIRECTORY/docker/azureCli.sh
 fi
 
 # Install web development tools
 if [ "$WEB_DEV" -eq 1 ]; then
-	bash ./node.sh
+	bash $DIRECTORY/node.sh
 fi
 
 ####################### specific for *my* old computer #######################

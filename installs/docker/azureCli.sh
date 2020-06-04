@@ -1,5 +1,7 @@
+DIRECTORY=$(readlink -f $0)
+
 # Check if script is running as root
-bash ../../validation/checkRootPrivileges.sh
+bash ${DIRECTORY%/*}/../../validation/checkRootPrivileges.sh
 test $? -eq 0 || exit
 
 # Update repository information and install the azure-cli package
@@ -23,7 +25,7 @@ curl -sL https://packages.microsoft.com/keys/microsoft.asc |
 
 # Add the Azure CLI software repository
 AZ_REPO=$(lsb_release -cs)
-bash ../../validation/addRepositoryIfNotPresent.sh "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main"
+bash ${DIRECTORY%/*}/../../validation/addRepositoryIfNotPresent.sh "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main"
 
 installCli
 
@@ -31,7 +33,7 @@ installCli
 if [ $? -ne 0 ]; then
     
     # Add a different Azure CLI repository
-    bash ../../validation/addRepositoryIfNotPresent.sh "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ xenial main"
+    bash ${DIRECTORY%/*}/../../validation/addRepositoryIfNotPresent.sh "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ xenial main"
     
     installCli
 fi
