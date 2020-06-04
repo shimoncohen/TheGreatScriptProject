@@ -7,7 +7,7 @@ DIRECTORY=$(readlink -f $0)
 
 # Check amount of parameters
 bash ${DIRECTORY%/*}/checkParameterCount.sh 1 $#
-if [ $? -eq 1 ]; then usage exit; fi;
+test $? -eq 0 || usage && exit
 
 # Check if given command exists
 if [[ $(which $1) != "" ]]; then

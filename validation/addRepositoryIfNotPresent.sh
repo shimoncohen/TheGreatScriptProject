@@ -10,11 +10,9 @@ function usage {
     echo "example: addRepositoryIfNotPresent.sh \"deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable\""
 }
 
-# Check that 1 parameter was given
-if [ "$#" -ne 1 ]; then
-	usage
-	exit 1
-fi
+# Check amount of parameters
+bash ${DIRECTORY%/*}/checkParameterCount.sh 1 $#
+test $? -eq 0 || usage && exit 1
 
 PPA=$1
 
