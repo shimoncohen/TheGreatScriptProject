@@ -5,6 +5,7 @@ bash ${DIRECTORY%/*}/../../validation/checkRootPrivileges.sh
 test $? -eq 0 || exit
 
 VERSION=2.7
+DEVELOPMENT=0
 
 function usage {
     echo "Run python.sh to install default version 2.7"
@@ -30,11 +31,15 @@ do
         shift # Remove
         shift
         ;;
+        --dev)
+        DEVELOPMENT=1
+        shift # Remove
+        ;;
     esac
 done
 
 # Add python repository
-bash ${DIRECTORY%/*}/../../validation/addRepositoryIfNotPresent.sh -y ppa:deadsnakes/ppa
+bash ${DIRECTORY%/*}/../../validation/addRepositoryIfNotPresent.sh ppa:deadsnakes/ppa
 
 # Update packages
 apt-get -y update
@@ -50,6 +55,11 @@ fi
 apt-get -y install --no-install-recommends \
     python$VERSION\
     python$MAJOR-pip
+
+# If should install development tools
+if [ $DEVELOPMENT -eq 1 ]; then
+    apt-get -y install --no-install-recommends python$VERSION-dev
+fi
 
 # Upgrade pip
 python$VERSION -m pip install --upgrade --force pip

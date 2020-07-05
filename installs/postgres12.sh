@@ -25,9 +25,15 @@ function installPackages {
         pgadmin4
 }
 
+# Update repositories
+apt-get -y update
+
+# Install dependencies
+apt-get -y install --no-install-recommends curl ca-certificates
+
 # Add postgres reository
-curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
-sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+bash ${DIRECTORY%/*}/../validation/checkIfCommandExists.sh psql
+test $? -eq 1 || (curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list')
 
 installPackages
 

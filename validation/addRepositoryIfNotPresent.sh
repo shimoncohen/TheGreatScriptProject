@@ -12,7 +12,7 @@ function usage {
 
 # Check amount of parameters
 bash ${DIRECTORY%/*}/checkParameterCount.sh 1 $#
-test $? -eq 0 || usage && exit 1
+test $? -eq 0 || (usage && exit 1)
 
 PPA=$1
 
@@ -21,5 +21,5 @@ PPA=$1
 # If PPA does not exist
 if ! grep -Fxq "$PPA" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
     # Add PPA
-    add-apt-repository $PPA
+    add-apt-repository -y "$PPA"
 fi
