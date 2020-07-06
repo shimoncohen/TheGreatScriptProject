@@ -4,6 +4,11 @@ DIRECTORY=$(readlink -f $0)
 bash ${DIRECTORY%/*}/../../validation/checkRootPrivileges.sh
 test $? -eq 0 || exit
 
+function usage {
+    echo "Run docker.sh to install docker"
+    echo "Run docker.sh --user <wanted_version> to add a user to docker group"
+}
+
 function installDockerPackages {
     
     # Update apt packages
@@ -12,6 +17,30 @@ function installDockerPackages {
     # Install the latest version of Docker Engine - Community and containerd
     apt-get -y install docker-ce docker-ce-cli containerd.io
 }
+
+USER=""
+
+# Loop through arguments and process them
+# Taken from: https://pretzelhands.com/posts/command-line-flags
+for arg in "$@"
+do
+    case $arg in
+        --help)
+        usage
+        shift # Remove --help
+        exit
+        ;;
+        --user=*)
+        USER="${arg#*=}"
+        shift # Remove
+        ;;
+        --user)
+        USER="$2"
+        shift # Remove
+        shift
+        ;;
+    esac
+done
 
 # Uninstall older versions
 apt-get remove docker docker-engine docker.io containerd runc
@@ -42,4 +71,13 @@ if [ $? -ne 0 ]; then
     bash ${DIRECTORY%/*}/../../validation/addRepositoryIfNotPresent.sh "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
     
     installDockerPackages
+fi
+
+if [ "$USER" != "" ]; then
+    # Add docker group
+    groupadd docker
+
+    # Add a user to docker group
+    usermod -aG docker $USER
+    newgrp docker
 fi
