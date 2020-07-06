@@ -4,10 +4,6 @@ DIRECTORY=$(readlink -f $0)
 bash ${DIRECTORY%/*}/../validation/checkRootPrivileges.sh
 test $? -eq 0 || exit
 
-# Check if command is already installed
-bash ${DIRECTORY%/*}/../validation/checkIfCommandExists.sh gdalinfo
-test $? -eq 1 || exit
-
 # Set GDAL environment variables
 export CPLUS_INCLUDE_PATH=/usr/include/gdal
 export C_INCLUDE_PATH=/usr/include/gdal
@@ -40,6 +36,10 @@ do
         ;;
     esac
 done
+
+# Check if command is already installed
+bash ${DIRECTORY%/*}/../validation/checkIfCommandExists.sh gdalinfo
+test $? -eq 1 || exit
 
 MAJOR=$(echo $VERSION | grep -oP '^[0-9]*')
 

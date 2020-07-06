@@ -4,10 +4,6 @@ DIRECTORY=$(readlink -f $0)
 bash ${DIRECTORY%/*}/../../validation/checkRootPrivileges.sh
 test $? -eq 0 || exit
 
-# Check if command is already installed
-bash ${DIRECTORY%/*}/../../validation/checkIfCommandExists.sh python$VERSION
-test $? -eq 1 || exit
-
 VERSION=2.7
 DEVELOPMENT=0
 
@@ -41,6 +37,10 @@ do
         ;;
     esac
 done
+
+# Check if command is already installed
+bash ${DIRECTORY%/*}/../../validation/checkIfCommandExists.sh python$VERSION
+test $? -eq 1 || exit
 
 # Add python repository
 bash ${DIRECTORY%/*}/../../validation/addRepositoryIfNotPresent.sh ppa:deadsnakes/ppa
