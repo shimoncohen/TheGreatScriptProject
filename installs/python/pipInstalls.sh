@@ -10,7 +10,7 @@ PACKAGES="pipPackages.txt"
 function usage {
     echo "Run pipInstalls.sh to install packages listed in pipPackages.txt"
     echo "Run python.sh --version <wanted_version> to install packages on a specific version of pip"
-    echo "Run python.sh --version <path> to install packages from a different file"
+    echo "Run python.sh --packages <path> to install packages from a different file"
 }
 
 # Loop through arguments and process them
