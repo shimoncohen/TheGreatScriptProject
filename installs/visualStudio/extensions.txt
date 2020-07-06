@@ -1,0 +1,10 @@
+# Python
+ms-python.python
+
+# C#
+ms-dotnettools.csharp
+
+# Docker
+ms-azuretools.vscode-docker
+formulahendry.docker-explorer
+p1c2u.docker-compose
