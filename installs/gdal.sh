@@ -15,8 +15,8 @@ export C_INCLUDE_PATH=/usr/include/gdal
 VERSION=2.7
 
 function usage {
-    echo "Run gdal.sh to install default version 2.7"
-    echo "Run gdal.sh --python-version <wanted_version> to install a different version"
+    echo "Run gdal.sh to install gdal on default python version 2.7"
+    echo "Run gdal.sh --python-version <wanted_version> to install gdal on a different version of python"
 }
 
 # Loop through arguments and process them
