@@ -1,8 +1,8 @@
 DIRECTORY=$(readlink -f $0)
 
 # Check amount of parameters
-bash ${DIRECTORY%/*}/checkParameterCount.sh 1 $#
-test $? -eq 0 || (usage && exit)
+bash checkParameterCount.sh 1 $#
+test $? -eq 0 || exit
 
 # Check if command exists
 bash checkIfCommandExists.sh $1
