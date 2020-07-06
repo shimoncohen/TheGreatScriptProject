@@ -6,17 +6,22 @@ DIRECTORY=$(readlink -f $0)
 bash ${DIRECTORY%/*}/../validation/checkRootPrivileges.sh
 test $? -eq 0 || exit
 
+# Check if command is already installed
+bash ${DIRECTORY%/*}/../validation/checkIfCommandExists.sh playonlinux
+test $? -eq 1 || exit
+
 # Install wine
-bash ./wine.sh
+bash ${DIRECTORY%/*}/wine.sh
 
 # Add repository key
-wget -q "http://deb.playonlinux.com/public.gpg" -O- | apt-key add -
+#wget -q "http://deb.playonlinux.com/public.gpg" -O- | apt-key add -
 
 # Add repository
-wget http://deb.playonlinux.com/playonlinux_stretch.list -O /etc/apt/sources.list.d/playonlinux.list
+#wget http://deb.playonlinux.com/playonlinux_stretch.list -O /etc/apt/sources.list.d/playonlinux.list
 
 # Update repositories
 apt-get -y update
 
 # Install playonlinux and dependencies
-apt-get -y install ia32-libs xterm playonlinux
+#apt-get -y install ia32-libs xterm playonlinux
+apt-get -y install xterm playonlinux

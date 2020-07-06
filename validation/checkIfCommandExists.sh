@@ -11,6 +11,7 @@ test $? -eq 0 || (usage && exit)
 
 # Check if given command exists
 if [[ $(which $1) != "" ]]; then
+    echo "The command $1 is already installed"
     exit 0
 fi;
 

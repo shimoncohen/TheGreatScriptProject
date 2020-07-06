@@ -4,6 +4,10 @@ DIRECTORY=$(readlink -f $0)
 bash ${DIRECTORY%/*}/../../validation/checkRootPrivileges.sh
 test $? -eq 0 || exit
 
+# Check if command is already installed
+bash ${DIRECTORY%/*}/../../validation/checkIfCommandExists.sh az
+test $? -eq 1 || exit
+
 # Update repository information and install the azure-cli package
 function installCli {
     

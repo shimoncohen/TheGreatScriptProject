@@ -4,8 +4,12 @@ DIRECTORY=$(readlink -f $0)
 bash ${DIRECTORY%/*}/../validation/checkRootPrivileges.sh
 test $? -eq 0 || exit
 
+# Check if command is already installed
+bash ${DIRECTORY%/*}/../validation/checkIfCommandExists.sh wine
+test $? -eq 1 || exit
+
 # Get system architecture
-ARCHITECTURE=$(bash ../getArchitecture.sh)
+ARCHITECTURE=$(bash ${DIRECTORY%/*}/../getArchitecture.sh)
 
 # If the system is 64 bit, enable 32 bit architecture
 if [ $ARCHITECTURE -eq 64 ]; then
@@ -13,10 +17,10 @@ if [ $ARCHITECTURE -eq 64 ]; then
 fi
 
 # Add the WineHQ signing key
-wget -qO- https://dl.winehq.org/wine-builds/Release.key | sudo apt-key add -
+wget -O - https://dl.winehq.org/wine-builds/winehq.key | sudo apt-key add -
 
 # Add the relevant repository from the WineHQ
-bash ${DIRECTORY%/*}/../validation/addRepositoryIfNotPresent.sh 'deb http://dl.winehq.org/wine-builds/ubuntu/ xenial main'
+bash ${DIRECTORY%/*}/../validation/addRepositoryIfNotPresent.sh 'deb https://dl.winehq.org/wine-builds/ubuntu/ xenial main'
 
 # Update repositories
 apt-get -y update

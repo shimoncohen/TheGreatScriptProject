@@ -4,6 +4,10 @@ DIRECTORY=$(readlink -f $0)
 bash ${DIRECTORY%/*}/../validation/checkRootPrivileges.sh
 test $? -eq 0 || exit
 
+# Check if command is already installed
+bash ${DIRECTORY%/*}/../validation/checkIfCommandExists.sh psql
+test $? -eq 1 || exit
+
 function installPackages {
 
     # Upgrade pip to latest version
@@ -32,8 +36,8 @@ apt-get -y update
 apt-get -y install --no-install-recommends curl ca-certificates
 
 # Add postgres reository
-bash ${DIRECTORY%/*}/../validation/checkIfCommandExists.sh psql
-test $? -eq 1 || (curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list')
+curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
 
 installPackages
 
