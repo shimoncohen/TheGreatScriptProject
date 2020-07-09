@@ -1,3 +1,5 @@
+#!/bin/bash
+
 function usage {
     echo 'This script checks that the given amount of parametes to a script is correct.'
     echo

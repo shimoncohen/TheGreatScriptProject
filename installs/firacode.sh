@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # From: https://github.com/tonsky/FiraCode/wiki/Linux-instructions#installing-with-a-package-manager
 
 fonts_dir="${HOME}/.local/share/fonts"

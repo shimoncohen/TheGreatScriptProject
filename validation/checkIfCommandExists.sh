@@ -1,3 +1,5 @@
+#!/bin/bash
+
 function usage {
     echo "Example: checkIfCommandExists.sh <wanted_command>"
     echo "The script returns 0 if exists, else 1"

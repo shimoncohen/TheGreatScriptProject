@@ -1,3 +1,5 @@
+#!/bin/bash
+
 DIRECTORY=$(readlink -f $0)
 
 # Check amount of parameters

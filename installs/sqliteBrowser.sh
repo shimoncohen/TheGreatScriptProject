@@ -1,3 +1,5 @@
+#!/bin/bash
+
 DIRECTORY=$(readlink -f $0)
 
 # Check if script is running as root

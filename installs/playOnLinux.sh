@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ######## Play on linux lets you install windows applications on linux ########
 
 DIRECTORY=$(readlink -f $0)
