@@ -1,3 +1,5 @@
+#!/bin/bash to every script.
+
 # Get systems supported architectures
 SUPPORTED_SYSTEMS=$(lscpu | grep "CPU op-mode(s)" | grep -oP "3.*")
 
