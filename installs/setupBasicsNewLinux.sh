@@ -4,7 +4,7 @@ DIRECTORY=$(readlink -f $0)
 DIRECTORY=${DIRECTORY%/*}
 
 # Check if script is running as root
-bash ${DIRECTORY%/*}/../validation/checkRootPrivileges.sh
+bash $DIRECTORY/../validation/checkRootPrivileges.sh
 test $? -eq 0 || exit
 
 ############################### install basics ###############################
