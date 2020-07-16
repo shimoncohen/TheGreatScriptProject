@@ -1,5 +1,10 @@
 # Python
 ms-python.python
+kevinrose.vsc-python-indent
+
+    # Django
+    bigonesystems.django
+    shamanu4.django-intellisense
 
 # C#
 ms-dotnettools.csharp
