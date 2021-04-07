@@ -42,7 +42,7 @@ do
         KUBERNETES=1
         shift # Remove
         ;;
-        --kubernetes)
+        --azure)
         AZURE=1
         shift # Remove
         ;;
