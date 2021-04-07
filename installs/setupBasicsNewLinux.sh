@@ -80,9 +80,3 @@ fi
 if [ "$WEB_DEV" -eq 1 ]; then
 	bash $DIRECTORY/node.sh
 fi
-
-####################### specific for *my* old computer #######################
-
-
-# Install tools for hdajackretask - tool for sound settings (because computer thinks earphones are always connected)
-apt-get -y install alsa-tools-gui
