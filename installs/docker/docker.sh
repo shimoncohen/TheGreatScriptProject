@@ -8,7 +8,7 @@ test $? -eq 0 || exit
 
 function usage {
     echo "Run docker.sh to install docker"
-    echo "Run docker.sh --user <wanted_version> to add a user to docker group"
+    echo "Run docker.sh --user <wanted_user> to add a user to docker group"
 }
 
 function installDockerPackages {
