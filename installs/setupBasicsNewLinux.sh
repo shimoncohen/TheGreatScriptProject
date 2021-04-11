@@ -54,8 +54,8 @@ done
 
 # Install development tools
 if [ "$DEV" -eq 1 ]; then
-    bash $DIRECTORY/python/python3.6.sh
-    bash $DIRECTORY/git.sh
+	bash $DIRECTORY/python/python.sh --version 3.7 --dev
+	bash $DIRECTORY/git.sh
 	bash $DIRECTORY/visualStudioCode.sh
 fi
 
@@ -67,8 +67,8 @@ fi
 # Install kubernetes and microk8s
 if [ "$KUBERNETES" -eq 1 ]; then
 	bash $DIRECTORY/docker/docker.sh
-    bash $DIRECTORY/docker/kubernetes.sh
-    bash $DIRECTORY/docker/microk8s/microk8s.sh
+	bash $DIRECTORY/docker/kubernetes.sh
+	bash $DIRECTORY/docker/microk8s/microk8s.sh
 fi
 
 # Install azure-cli
